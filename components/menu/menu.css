@@ -1,0 +1,14 @@
+.item {
+    display: inline-block !important;
+}
+
+.item.active {
+    color:#6E44FF !important;
+    background-color:white !important;
+}
+
+.left-border {
+    border-left-color: rgba(34, 36, 38, 0.14902);
+    border-left-style: solid;
+    border-left-width: 1px;
+}

@@ -1,0 +1,66 @@
+.editor {
+    width:100% !important;
+    height:100vh !important;
+    resize: none !important;
+}
+
+.toolbar {
+    width:100%;
+    margin:15px;
+    margin-left:30px;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+textarea {
+    height:calc(100vh - 42px) !important;
+    max-height:calc(100vh - 42px) !important;
+    min-height:calc(100vh - 42px) !important;
+    border-radius: 0px !important;
+    outline: none !important;
+    padding:15px !important;
+    padding-left:30px !important;
+}
+
+textarea:focus {
+outline: none !important;
+}
+
+.form {
+    margin:0 !important;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    background:  #E0E1E2;
+    color:rgba(0,0,0,.6);
+  }
+  50% {
+    background: #21ba45;
+        color:white;
+  }
+  100% {
+    background:  #E0E1E2;
+       color:rgba(0,0,0,.6); 
+  }
+}
+@keyframes pulse {
+  0% {
+    background: #E0E1E2;
+        color:rgba(0,0,0,.6);
+  }
+  50% {
+    background: #21ba45;
+    color:white;
+  }
+  100% {
+    background:  #E0E1E2;
+        color:rgba(0,0,0,.6);
+  }
+}
+
+#save.pulse {
+  -webkit-animation: pulse 0.8s ease-in-out infinite alternate;
+  animation: pulse 0.8s ease-in-out infinite alternate;
+}

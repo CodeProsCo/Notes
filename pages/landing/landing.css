@@ -1,0 +1,19 @@
+#content{
+    margin-top:13px;
+}
+
+body{
+    background-color:#f7f7f7;
+}
+
+.no-padding{
+    padding:0 !important;
+}
+
+.left-padding-fix {
+    padding-left:15px !important;
+}
+
+.small-margin-around{
+        margin: 10px !important;
+}

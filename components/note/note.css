@@ -1,0 +1,13 @@
+.card{
+    margin:5px !important;
+}
+
+.right.floated.trash .trash:hover{
+    color: #db2828;
+     transition: color 0.5s ease;
+}
+
+.right.floated.share .share:hover{
+    color: #2185d0;
+     transition: color 0.5s ease;
+}
