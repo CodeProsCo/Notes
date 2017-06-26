@@ -1,0 +1,28 @@
+<page>
+   <div class="ui container">
+      <div class="ui form">
+        <div class="inline field">
+            <div class="ui checkbox" id="location">
+               <input type="checkbox">
+               <label>Store my notes in a different folder</label>
+            </div>
+         </div>
+         <div class="disabled field" id="note-location">
+            <input type="text" placeholder="Note directory"  value="{noteLocation}"/>
+         </div>
+         <br/>
+         <div class="inline field">
+            <div class="ui checkbox" id="encrypt">
+               <input type="checkbox">
+               <label>Encrypt my notes using a key</label>
+            </div>
+         </div>
+         <div class="disabled field" id="encryption-key">
+            <input type="text" placeholder="Key must contain 8 characters, including lower and upper case letters, a number and a special character" value="{encryptionKey}"/>
+            <div class="ui bottom attached indicating progress">
+               <div class="bar"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+</page>

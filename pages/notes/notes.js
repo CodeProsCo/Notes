@@ -76,11 +76,13 @@ function getFiles () {
       let ret = []
 
       const actions = files.map((file) => {
-        return new Promise((resolve) => {
-          readFile(file, ret).then((arr) => {
-            resolve(arr)
+        if (!file.includes('config')) {
+          return new Promise((resolve) => {
+            readFile(file, ret).then((arr) => {
+              resolve(arr)
+            })
           })
-        })
+        }
       })
 
       Promise.all(actions).then((result) => {

@@ -25,6 +25,33 @@ module.exports = {
         return resolve(component)
       })
     })
+  },
+
+  getConfiguration: () => {
+    return new Promise((resolve, reject) => {
+      fs.readFile('C:\\notes\\config.json', 'utf-8', (err, data) => {
+        if (err) {
+          reject(err)
+        }
+
+        const obj = JSON.parse(data)
+        const config = new Configuration(obj)
+
+        resolve(config)
+      })
+    })
+  }
+}
+
+function Configuration (config) {
+  for (const property in config) {
+    this[property] = config[property]
+  }
+
+  this.get = (key) => {
+    const value = this[key]
+
+    return value || ''
   }
 }
 
@@ -106,7 +133,7 @@ function Component (exports, params, template) {
     // <div>test</div>
     if (this.params) {
       for (let property in this.params) {
-        if (this.params.hasOwnProperty(property)) {
+        if (this.params.hasOwnProperty(property) && typeof (params[property]) !== 'function') {
           temp = temp.replace(`{${property}}`, this.params[property])
         }
       }

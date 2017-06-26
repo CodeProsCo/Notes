@@ -12,3 +12,7 @@
     border-left-style: solid;
     border-left-width: 1px;
 }
+
+#title-text::before {
+  width:0px !important;  
+}

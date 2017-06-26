@@ -12,7 +12,7 @@ module.exports = {
   getName: () => 'editor',
 
   execute: () => {
-    document.getElementById('editor').addEventListener('input', (e) => {
+    const editorInput = (e) => {
       const save = document.getElementById('save')
 
       if (editorState !== e.currentTarget.value) {
@@ -22,54 +22,58 @@ module.exports = {
         save.classList.remove('pulse')
         save.classList.add('disabled')
       }
-    })
+    }
 
-    document.getElementById('editor').addEventListener('focus', () => {
+    const editorFocus = () => {
       const link = document.getElementById('hyperlink')
 
       link.classList.remove('disabled')
-    })
+    }
 
-    document.getElementById('editor').addEventListener('blur', () => {
+    const editorBlur = () => {
       const link = document.getElementById('hyperlink')
 
       link.classList.add('disabled')
-    })
+    }
 
-    document.getElementById('delete').addEventListener('click', (e) => {
-      const button = e.currentTarget
+    const deleteClick = (e) => {
+      const button = e.target
 
       button.innerHTML += 'Are you sure?'
-      button.id = 'delete-confirm'
+      button.removeEventListener('click', deleteClick)
+      button.addEventListener('click', confirmDelete)
+    }
 
-      document.getElementById('delete-confirm').addEventListener('click', (e) => {
-        const id = document.getElementById('editor').dataset['noteId']
-        const fileName = `C:\\notes\\${id}.json`
+    const confirmDelete = (e) => {
+      const id = document.getElementById('editor').dataset['noteId']
+      const fileName = `C:\\notes\\${id}.json`
+      const button = e.target
 
-        fs.unlink(fileName, (err) => {
-          if (err) {
-            return
-          }
+      fs.unlink(fileName, (err) => {
+        if (err) {
+          return
+        }
 
-          const editor = document.getElementById('editor')
+        const editor = document.getElementById('editor')
 
-          editor.value = ''
-          editor.setAttribute('data-note-id', '')
+        editor.value = ''
+        editor.setAttribute('data-note-id', '')
 
-          document.getElementById('title').value = ''
-          document.getElementById('subtitle').value = ''
+        document.getElementById('title').value = ''
+        document.getElementById('subtitle').value = ''
 
-          e.target.id = 'delete'
-          e.target.innerHTML = e.target.innerHTML.replace(/Are you sure\?/g, '')
+        button.innerHTML = button.innerHTML.replace(/Are you sure\?/g, '')
+        button.removeEventListener('click', confirmDelete)
+        button.addEventListener('click', deleteClick)
 
-          document.getElementById('share').classList.add('disabled')
-          document.getElementById('delete').classList.add('disabled')
-          editor.focus()
-        })
+        document.getElementById('share').classList.add('disabled')
+        document.getElementById('delete').classList.add('disabled')
+        document.getElementById('title-text').innerHTML = `New Note`
+        editor.focus()
       })
-    })
+    }
 
-    document.getElementById('save').addEventListener('click', (e) => {
+    const saveClick = (e) => {
       const textarea = document.getElementById('editor')
       const title = document.getElementById('title').value
       const subtitle = document.getElementById('subtitle').value
@@ -115,6 +119,13 @@ module.exports = {
       button.classList.add('disabled')
 
       document.getElementById('delete').classList.remove('disabled')
-    })
+      document.getElementById('title-text').innerHTML = `Editing ${title}`
+    }
+
+    document.getElementById('editor').addEventListener('input', editorInput)
+    document.getElementById('editor').addEventListener('focus', editorFocus)
+    document.getElementById('editor').addEventListener('blur', editorBlur)
+    document.getElementById('delete').addEventListener('click', deleteClick)
+    document.getElementById('save').addEventListener('click', saveClick)
   }
 }

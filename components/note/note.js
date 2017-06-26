@@ -53,6 +53,7 @@ module.exports = {
             editor.setAttribute('data-note-id', thisId)
             editor.focus()
 
+            document.getElementById('title-text').innerHTML = `Editing ${file.title}`
             document.getElementById('title').value = file.title
             document.getElementById('subtitle').value = file.subtitle
             document.getElementById('delete').classList.remove('disabled')
