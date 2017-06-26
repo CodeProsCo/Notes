@@ -29,11 +29,10 @@ module.exports = {
 
         const file = JSON.parse(data)
 
+        star.classList.toggle('active')
         file.favourite = star.classList.contains('active')
 
         fs.writeFile(fileLocation, JSON.stringify(file, null, 2), 'utf-8')
-
-        star.classList.toggle('active')
       })
     })
 
