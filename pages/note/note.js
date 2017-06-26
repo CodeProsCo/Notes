@@ -8,7 +8,7 @@ module.exports = {
   getStyleSheet: () => path.join(__dirname, 'note.css'),
   getName: () => 'note',
 
-  execute: () => {
+  execute: (params) => {
     engine.setActiveButton('new-file')
   },
 

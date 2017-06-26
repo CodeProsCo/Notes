@@ -92,16 +92,16 @@ module.exports = {
 
       editorState = textarea.value
 
-      if (!noteId) {
-        noteId = uuid.v4()
-      }
-
       const payload = {
         title: title,
         subtitle: subtitle,
         text: editorState,
-        timestamp: new Date(),
-        noteId: noteId
+        timestamp: new Date()
+      }
+
+      if (!noteId) {
+        payload.noteId = uuid.v4()
+        payload.favourite = false
       }
 
       const fileLocation = `C:\\notes\\${payload.noteId}.json`

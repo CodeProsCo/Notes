@@ -10,6 +10,33 @@ module.exports = {
   execute: (params) => {
     const thisId = params.id
 
+    const card = document.getElementById(params.id)
+    const star = card.querySelector('.star')
+
+    if (params.fav) {
+      star.classList.add('active')
+    }
+
+    star.addEventListener('click', (e) => {
+      e.stopPropagation()
+
+      const fileLocation = `C:\\notes\\${thisId}.json`
+
+      fs.readFile(fileLocation, 'utf-8', (err, data) => {
+        if (err) {
+          return
+        }
+
+        const file = JSON.parse(data)
+
+        file.favourite = star.classList.contains('active')
+
+        fs.writeFile(fileLocation, JSON.stringify(file, null, 2), 'utf-8')
+
+        star.classList.toggle('active')
+      })
+    })
+
     document.getElementById(thisId).addEventListener('click', () => {
       note.getPage().then((page) => {
         page.render().then(() => {

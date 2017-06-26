@@ -15,7 +15,7 @@ module.exports = {
       files.forEach((file) => {
         engine.newComponent(note, file).then((cmp) => {
           cmp.render('note-list', file.noteId)
-          cmp.execute({id: file.noteId})
+          cmp.execute({id: file.noteId, fav: file.favourite})
         })
       })
     })
